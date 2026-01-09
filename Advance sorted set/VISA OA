@@ -53,7 +53,7 @@ return ans_arr
 
 
 
-T.C & S.C: Log N &  0 (2n) 
+T.C & S.C: 0(n LogN) &  0 (2n) //n logn ; logn for sets and n for rebuilding the array 
 LINKS: https://www.youtube.com/watch?v=-Ark2hiaB7Q 
 
 
