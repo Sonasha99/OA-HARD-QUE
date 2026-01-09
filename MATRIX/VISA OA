@@ -1,0 +1,102 @@
+1.Que: VISA OA - 9/1
+EX: 
+bubbles = [
+  [3, 1, 2, 1],
+  [1, 1, 1, 4],
+  [3, 3, 2, 2],
+  [3, 3, 3, 4]
+]
+solution(bubbles) = [
+  [0, 0, 0, 1],
+  [0, 0, 0, 4],
+  [0, 0, 2, 2],
+  [3, 0, 2, 4]
+]
+LOGIC:
+Two adjacent cell are connected only when they are horizontally or vertically connected 
+Mark special and delete them , 
+Special cell : cell with atleast 2 adjacent neighbour should have same value as our cell AND agr cell special hai toh uska aaju wale bhi special hojate hai.
+Do matrix traversal => find them all and destroy them by replacing them by 0
+Special cell k sath wale cell bhi special hai lets call them fake cell so but unke aage nh hoga fake k sath wale cell is not special.
+Gravity effect 
+CODE:
+vector<int>grid(n,+1vector<int>(m+1,-1)
+vector<int>fixed(n,+1vector<int>(m+1,0)
+for(int i =1 ; i<=n;i++) {
+for(int j =1 ; i<=m;i++) {
+cin>>grid[i][j];
+}
+}
+
+for(int i =1;i<=n;i++){
+	for(int j =1;j<=m;j++){
+int count =0; 
+int u = grid[i][j]
+		
+		if( i-1>=1&&u==grid[i-1][j]) {
+			count++;
+		}
+		if( i+1<=n && u==grid[i+1][j]) {
+			count++;
+		}
+		if(j-1>=1&&u==grid[i][j-1]) {
+			count++;
+		}
+		if(j+1<=n &&(u==grid[i][j+1]) {
+			count++;
+		}
+	}
+         //marking it as special cell in fixed so we know it special
+	if(count>=2){
+		fixed[i][j] = 1;
+	}
+//marking the fake special cell
+   for(int i =1;i<=n;i++){
+	for(int j =1;j<=m;j++){
+	if(u==grid[i-1][j]) {
+			fixed[i-1][j]=1;
+		}
+		if(u==grid[i+1][j]) {
+			fixed[i+1][j]=1;
+		}
+		if(u==grid[i][j-1]) {
+			fixed[i][j-1]=1;
+		}
+		if(u==grid[i][j+1]) {
+			fixed[i][j+1]=1;
+		}
+}
+}
+
+
+
+for(int i =0;i<=n;i++){
+	for(int j = 0 ; j<=n;j++){
+		if(fixed[i][j]==1) {
+			grid[i][j] =0; //destroying the cell
+		}
+	}
+}
+
+for(j=1;j<=n;j++){
+	vector<int>p;
+	for(int i = n;i>=1;i++){
+		if(grid[i][j]){
+			p.push_back(grid[i][j]);
+		}
+		grid[i][j]=0;
+	}
+	ip =0;
+	for(int i =n; i>=1;i++){
+		l = ip.size();
+		if(ip<l){
+			grid[i][j] = p[ip];ip++;
+			
+		}
+	}
+}
+
+print(grid)
+
+T.C & S.C: O(n*m) & O(n*m)
+LINKS: 
