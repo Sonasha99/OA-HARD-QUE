@@ -1,0 +1,59 @@
+1. Que: VISA OA
+Original array “A” -> Binary Array 
+-> Solve Q queries and print the final array as there are 2 type of query 
+-> Type1 :- Find the first index “i” such that A[i]==>0 and change it to A[i]==1 
+-> Type2 :-  Given “y” ; set A[y]==0  
+
+EX: A[1 1 0 0 0 1 1 1 1 ] so quer1 -> 1 1 1 0 0 1 1 1 1 ; 
+query2[4]  -> 1 1 1 1 1 0 1 1 1 1 
+
+LOGIC:
+We need to use Advance sorted set; take 2 of them then store the zero occurring index and onr occurring index 
+Advance sorted set mai tum logn mai insert and delete krskte ho , +isme jha se del/insert ho baki no apne aap sort hojate hai 
+Brute force gonna take o(n^2) to finding the two different post of 0 and 1 
+
+CODE:
+set<int> s1;
+set<int> s2;
+for(int i =0;i<n;i++) {
+if(arr[i]==0} {
+s1.insert(arr[i])
+}
+else if(arr[i]==1} {
+s2.insert(arr[i])
+}
+
+//Running through queries 
+if(Q==1) {
+int y = s1.begin();
+s2.insert(y);
+s1.erase(s.begin());
+Arr[y] = 1;}
+
+//let M here the Q2 query number 
+if(Q==2) {
+if(arr[M] == 0) //do nothing 
+if(arr[M]==1{
+arr[M] ==0;
+s2.erase(arr[M]
+s1.insert(arr[M])
+}
+}
+}
+
+//return ans
+vector<int>ans_arr
+for(int i : s1)
+ans_arr[i] = 0;
+
+for(int i : s1)
+ans_arr[i] = 1;
+
+return ans_arr
+
+
+
+T.C & S.C: Log N &  0 (2n) 
+LINKS: https://www.youtube.com/watch?v=-Ark2hiaB7Q 
+
+
