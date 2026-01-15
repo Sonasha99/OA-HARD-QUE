@@ -1,0 +1,129 @@
+VERSION 2 
+
+USING BFS 
+START Spreading the virus!
+(Horizontal , vertical dekhna hai bus)
+
+
+1.Que: VISA OA - Version2 (Special cell)
+EX: 
+bubbles = [
+  [3, 1, 2, 1],
+  [1, 1, 1, 4],
+  [3, 3, 2, 2],
+  [3, 3, 3, 4]
+]
+solution(bubbles) = [
+  [0, 0, 0, 1],
+  [0, 0, 0, 4],
+  [0, 0, 2, 2],
+  [3, 0, 2, 4]
+]
+LOGIC:
+Identify the mark the og special cell
+Strat spreading the special cell using BFS.
+This is more correct approach as bfs gonna explore all the possibilities. Fake special k aage bhi expand karega which is different than Version1
+For optimisation more on BFS part you can use GOD node method. Connect all node to GOD node and then cal the BFS of GOD Node.
+
+CODE:
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+#define endl "\n"
+void solve() {
+    int n; cin>>n;
+    int m ; cin>>m;
+
+
+    vector<vector<int>> grid(n+2, vector<int>(m+2,0));
+    vector<vector<bool>> special_cell(n+2, vector<bool>(m+2, false));
+
+
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=m;j++){
+            cin>>grid[i][j];
+        }
+    }
+
+
+    for(int i=1;i<=n;i++){
+    for(int j=1;j<=m;j++){
+        int check = grid[i][j];
+        int count=0;
+
+
+        if(i>1 && check == grid[i-1][j]) count++;
+        if(i<n &&check == grid[i+1][j]) count++;      
+        if(j>1 &&check == grid[i][j-1]) count++;
+        if(j<n &&check == grid[i][j+1]) count++;
+
+
+        if(count>=2){
+        special_cell[i][j] = true;
+
+
+        //BFS traversal to mark all connected special cells
+        if(check == grid[i-1][j]) special_cell[i-1][j] = true;
+        if(check == grid[i+1][j]) special_cell[i+1][j] = true;
+        if(check == grid[i][j-1]) special_cell[i][j-1] = true;
+        if(check == grid[i][j+1]) special_cell[i][j+1] = true;
+       
+        }
+    }
+}
+
+
+//deleting all the special cells
+    for(int i=1;i<=n;i++){
+    for(int j=1;j<=m;j++){
+        if(special_cell[i][j]== true){
+            grid[i][j]=0;
+        }
+        cout<<special_cell[i][j]<<" ";
+        }
+    cout<<endl;
+    }
+    cout<<endl;
+
+
+    //Gravity Effect
+    for(int j =1;j<=m;j++){ //column wise operation
+        vector<int>p;
+
+
+        for(int i =n;i>=1;i--){
+        if(grid[i][j]!=0) p.push_back(grid[i][j]);
+        grid[i][j]=0;
+        }
+   
+        int index=0;
+        for(int i =n;i>=1&& index<p.size();i--){
+            grid[i][j]=p[index++];
+        }
+    }
+ 
+    //Printing the final grid
+    for(int i =1;i<=n;i++){
+        for(int j=1;j<=m;j++){
+            cout<<grid[i][j]<<" ";
+        }
+        cout<< '\n';
+    }
+}
+
+
+int32_t main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    int t = 1;
+    cin >> t;
+    while (t--) solve();
+    return 0;
+}
+
+T.C & S.C: o(n*m) and o(n*m)
+LINKS:
+
+
+
+
